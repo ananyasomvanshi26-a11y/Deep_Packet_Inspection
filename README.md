@@ -95,7 +95,7 @@ TLS Client Hello:
         └── Server Name: "www.youtube.com"  ← We extract THIS!
 ```
 
-**This is the key to DPI**: Even though HTTPS is encrypted, the domain name is visible in the first packet!
+**This is the key to DPI**: Even though HTTPS is encrypted, the domain name is visible in the first packet
 
 ---
 
@@ -145,11 +145,11 @@ Deep_Packet_Inspection/
 │   ├── packet_parser.cpp      # Protocol parsing (Ethernet/IP/TCP/UDP)
 │   ├── sni_extractor.cpp      # TLS SNI, HTTP Host, DNS extraction
 │   ├── types.cpp              # App classification (sniToAppType)
-│   ├── main.cpp               # ★ BASIC VERSION - packet reader ★
+│   ├── main.cpp               # BASIC VERSION - packet reader 
 │   ├── main_simple.cpp        # Minimal SNI test version
-│   ├── main_working.cpp       # ★ SIMPLE DPI - blocking + reports ★
-│   ├── dpi_mt.cpp             # ★ MULTI-THREADED VERSION ★
-│   ├── main_dpi.cpp           # ★ FULL ENGINE entry point ★
+│   ├── main_working.cpp       # SIMPLE DPI - blocking + reports 
+│   ├── dpi_mt.cpp             # MULTI-THREADED VERSION 
+│   ├── main_dpi.cpp           # FULL ENGINE entry point 
 │   ├── dpi_engine.cpp         # Full engine orchestrator
 │   ├── load_balancer.cpp      # LB thread logic
 │   ├── fast_path.cpp          # FP thread + TCP state machine
@@ -294,8 +294,8 @@ if (pkt.tuple.dst_port == 443 && pkt.payload_length > 5) {
 
 1. **Check if it's a TLS Client Hello:**
    ```
-   Byte 0: Content Type = 0x16 (Handshake) ✓
-   Byte 5: Handshake Type = 0x01 (Client Hello) ✓
+   Byte 0: Content Type = 0x16 (Handshake) 
+   Byte 5: Handshake Type = 0x01 (Client Hello) 
    ```
 
 2. **Navigate to Extensions:**
@@ -310,7 +310,7 @@ if (pkt.tuple.dst_port == 443 && pkt.payload_length > 5) {
    SNI List Length: M
    SNI Type: 0x00 (hostname)
    SNI Length: L
-   SNI Value: "www.youtube.com"  ← FOUND!
+   SNI Value: "www.youtube.com"  ← FOUND
    ```
 
 4. **Map SNI to App Type:**
@@ -833,7 +833,7 @@ Connection to YouTube:
   Packet 2 (SYN-ACK)       → No SNI yet, FORWARD  
   Packet 3 (ACK)           → No SNI yet, FORWARD
   Packet 4 (Client Hello)  → SNI: www.youtube.com
-                           → App: YOUTUBE (blocked!)
+                           → App: YOUTUBE (blocked)
                            → Mark flow as BLOCKED
                            → DROP this packet
   Packet 5 (Data)          → Flow is BLOCKED → DROP
