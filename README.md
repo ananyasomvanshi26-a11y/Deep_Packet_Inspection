@@ -520,12 +520,6 @@ class TSQueue {
 };
 ```
 
-**How it works:**
-- `push()`: Producer adds item, signals waiting consumers
-- `pop()`: Consumer waits until item available, then takes it
-- `mutex`: Only one thread can access at a time
-- `condition_variable`: Efficient waiting (no busy-loop)
-
 ---
 
 ## 7. Deep Dive: Each Component
@@ -823,10 +817,6 @@ Connection to YouTube:
   ...all subsequent packets → DROP
 ```
 
-**Why this approach?**
-- We can't identify the app until we see the Client Hello
-- Once identified, we block all future packets of that flow
-- The connection will fail/timeout on the client
 
 ---
 
