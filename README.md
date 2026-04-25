@@ -172,10 +172,6 @@ PcapReader reader;
 reader.open("capture.pcap");
 ```
 
-**What happens:**
-1. Open the file in binary mode
-2. Read the 24-byte global header (magic number, version, etc.)
-3. Verify it's a valid PCAP file
 
 **PCAP File Format:**
 ```
@@ -200,11 +196,6 @@ while (reader.readNextPacket(raw)) {
     // raw.header contains timestamp and length
 }
 ```
-
-**What happens:**
-1. Read 16-byte packet header
-2. Read N bytes of packet data (N = header.incl_len)
-3. Return false when no more packets
 
 ### Step 3: Parse Protocol Headers
 
