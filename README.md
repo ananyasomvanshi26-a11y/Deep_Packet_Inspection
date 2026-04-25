@@ -841,45 +841,34 @@ Connection to YouTube:
 | — | — | No external libraries needed! |
 
 
-### Compile
 
+### Build
+ 
 **Windows:**
 ```bash
-mingw32-make
+mkdir build                      # create a separate folder for compiled files (keeps source code clean)
+cd build                         # move into the build folder
+cmake .. -G "MinGW Makefiles"    # read CMakeLists.txt and generate Windows-compatible build files
+mingw32-make                     # compile all source files and link the 4 executables
 ```
-
-**macOS / Linux:**
-**Simple Version:**
+ 
+**Linux / macOS:**
 ```bash
-g++ -std=c++17 -O2 -I include -o dpi_simple \
-    src/main_working.cpp \
-    src/pcap_reader.cpp \
-    src/packet_parser.cpp \
-    src/sni_extractor.cpp \
-    src/types.cpp
+mkdir build                      # create a separate folder for compiled files (keeps source code clean)
+cd build                         # move into the build folder
+cmake ..                         # read CMakeLists.txt and generate build files
+make                             # compile all source files and link the 4 executables
 ```
-
-**Multi-threaded Version:**
-```bash
-g++ -std=c++17 -pthread -O2 -I include -o dpi_engine \
-    src/dpi_mt.cpp \
-    src/pcap_reader.cpp \
-    src/packet_parser.cpp \
-    src/sni_extractor.cpp \
-    src/types.cpp
-```
+  
 
 This compiles all source files and links **4 executables**
 
 ---
 
-### Step 5 — Get a Test PCAP File
-
-You need a `.pcap` file as input. You can use any Wireshark capture. Download sample captures from [wiki.wireshark.org/SampleCaptures](https://wiki.wireshark.org/SampleCaptures).
 
 ---
 
-### Step 6 — Run the Executables
+### Run the Executables
 
 > **Windows users:** Run this first for proper output display:
 > ```cmd
