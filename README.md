@@ -11,7 +11,7 @@
 - **Parental Controls**: Block inappropriate websites
 - **Security**: Detect malware or intrusion attempts
 
-### What Our DPI Engine Does:
+### What My DPI Engine Does:
 ```
 User Traffic (PCAP) → [DPI Engine] → Filtered Traffic (PCAP)
                            ↓
@@ -866,7 +866,6 @@ This compiles all source files and links **4 executables**
 ---
 
 
----
 
 ### Run the Executables
 
