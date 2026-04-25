@@ -72,10 +72,6 @@ A **connection** (or "flow") is uniquely identified by 5 values:
 | Destination Port | 443 | Service being accessed (443 = HTTPS) |
 | Protocol | TCP (6) | TCP or UDP |
 
-**Why is this important?** 
-- All packets with the same 5-tuple belong to the same connection
-- If we block one packet of a connection, we should block all of them
-- This is how we "track" conversations between computers
 
 ### What is SNI?
 
@@ -262,11 +258,6 @@ tuple.protocol = parsed.protocol;
 Flow& flow = flows[tuple];  // Get or create
 ```
 
-**What happens:**
-- The flow table is a hash map: `FiveTuple → Flow`
-- If this 5-tuple exists, we get the existing flow
-- If not, a new flow is created
-- All packets with the same 5-tuple share the same flow
 
 ### Step 5: Extract SNI (Deep Packet Inspection)
 
@@ -666,7 +657,7 @@ AppType sniToAppType(const std::string& sni) {
 
 ---
 
-## 8. How SNI Extraction Works
+## 8. Working of SNI
 
 ### The TLS Handshake
 
@@ -849,72 +840,8 @@ Connection to YouTube:
 | CMake | 3.16+ | Cross-platform build system |
 | — | — | No external libraries needed! |
 
-**Install on Windows:**
-1. Download MinGW-w64 from [winlibs.com](https://winlibs.com) — pick **GCC with POSIX threads, UCRT runtime, 64-bit**
-2. Extract and add `bin/` folder to your system PATH
-3. Download CMake installer from [cmake.org/download](https://cmake.org/download) — select **"Add to PATH"** during install
-4. Verify: open a terminal and run `g++ --version` and `cmake --version`
 
-**Install on Linux (Ubuntu/Debian):**
-```bash
-sudo apt install g++ cmake
-```
-
-**Install on macOS:**
-```bash
-brew install cmake
-# g++ comes with Xcode Command Line Tools
-xcode-select --install
-```
-
----
-
-### Step 1 — Clone the Repository
-
-```bash
-git clone https://github.com/ananyasomvanshi26-a11y/Deep_Packet_Inspection.git
-cd Deep_Packet_Inspection
-```
-
----
-
-### Step 2 — Create Build Directory
-
-CMake needs a separate folder for build files. This keeps source code clean.
-
-```bash
-mkdir build
-cd build
-```
-
----
-
-### Step 3 — Configure with CMake
-
-CMake reads `CMakeLists.txt` and generates the actual build files.
-
-**Windows:**
-```bash
-cmake .. -G "MinGW Makefiles"
-```
-
-**macOS / Linux:**
-```bash
-cmake ..
-```
-
-You should see output like:
-```
--- The CXX compiler identification is GNU 15.2.0
--- Found Threads: TRUE
--- Configuring done
--- Generating done
--- Build files have been written to: .../build
-```
-
----
-
-### Step 4 — Compile
+### Compile
 
 **Windows:**
 ```bash
