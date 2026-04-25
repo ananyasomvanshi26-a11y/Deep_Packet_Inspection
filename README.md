@@ -163,7 +163,7 @@ Deep_Packet_Inspection/
 
 ## 5. The Journey of a Packet (Simple Version)
 
-Let's trace a single packet through `main_working.cpp`:
+Tracing a single packet through `main_working.cpp`:
 
 ### Step 1: Read PCAP File
 
@@ -931,18 +931,27 @@ mingw32-make
 ```
 
 **macOS / Linux:**
+**Simple Version:**
 ```bash
-make
+g++ -std=c++17 -O2 -I include -o dpi_simple \
+    src/main_working.cpp \
+    src/pcap_reader.cpp \
+    src/packet_parser.cpp \
+    src/sni_extractor.cpp \
+    src/types.cpp
 ```
 
-This compiles all source files and links **4 executables**:
+**Multi-threaded Version:**
+```bash
+g++ -std=c++17 -pthread -O2 -I include -o dpi_engine \
+    src/dpi_mt.cpp \
+    src/pcap_reader.cpp \
+    src/packet_parser.cpp \
+    src/sni_extractor.cpp \
+    src/types.cpp
+```
 
-```
-[ 33%] Built target packet_analyzer   ← basic reader
-[ 66%] Built target dpi_simple        ← single-threaded DPI
-[ 82%] Built target dpi_engine        ← multi-threaded DPI
-[100%] Built target dpi_full          ← full engine
-```
+This compiles all source files and links **4 executables**
 
 ---
 
