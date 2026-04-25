@@ -82,7 +82,7 @@ A **connection** (or "flow") is uniquely identified by 5 values:
 **Server Name Indication (SNI)** is part of the TLS/HTTPS handshake. When you visit `https://www.youtube.com`:
 
 1. Your browser sends a "Client Hello" message
-2. This message includes the domain name in **plaintext** (not encrypted yet!)
+2. This message includes the domain name in **plaintext** (not encrypted yet)
 3. The server uses this to know which certificate to send
 
 ```
@@ -92,7 +92,7 @@ TLS Client Hello:
 ├── Cipher Suites: [list]
 └── Extensions:
     └── SNI Extension:
-        └── Server Name: "www.youtube.com"  ← We extract THIS!
+        └── Server Name: "www.youtube.com"  ← We extract THIS
 ```
 
 **This is the key to DPI**: Even though HTTPS is encrypted, the domain name is visible in the first packet
@@ -699,7 +699,7 @@ When you visit `https://www.youtube.com`:
      │       encrypted - we can't see it)      │
 ```
 
-**We can only extract SNI from the Client Hello!**
+**We can only extract SNI from the Client Hello**
 
 ### TLS Client Hello Structure
 
